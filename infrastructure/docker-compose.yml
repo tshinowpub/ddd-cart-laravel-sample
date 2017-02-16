@@ -1,0 +1,26 @@
+version: '2'
+
+services:
+
+  db:
+    container_name: ddd-cart-laravel-db
+    image: mysql:5.7
+    volumes:
+      - ./mysql/:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: laravel
+
+  web:
+    container_name: ddd-cart-laravel-web
+    image: ddd-cart-laravel/web
+    build: ./web
+    depends_on:
+      - db
+    volumes:
+      - ../web/:/var/www/html
+    ports:
+      - '80:80'
+    privileged: true
