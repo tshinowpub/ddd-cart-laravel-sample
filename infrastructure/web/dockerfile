@@ -42,6 +42,12 @@ RUN apt-get update \
         vim \
         wget
 
+RUN docker-php-ext-install \
+    pdo_mysql \
+    mysqli \
+    mbstring \
+    zip
+
 RUN docker-php-ext-configure \
     gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
 
